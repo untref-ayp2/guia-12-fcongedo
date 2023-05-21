@@ -67,3 +67,119 @@ func (n *BinaryNode) Height() int {
 	}
 	return int(1 + math.Max(float64(leftHeight), float64(rightHeight)))
 }
+
+func (n *BinaryNode) SumaNodos() int {
+	suma := n.data
+	if n.left != nil {
+		suma += n.left.SumaNodos()
+	}
+	if n.right != nil {
+		suma += n.right.SumaNodos()
+	}
+	return suma
+}
+
+func (n *BinaryNode) SumaHojas() int {
+	if n.left == nil && n.right == nil {
+		return n.data
+	}
+	suma := 0
+	if n.left != nil {
+		suma += n.left.SumaHojas()
+	}
+	if n.right != nil {
+		suma += n.right.SumaHojas()
+	}
+	return suma
+}
+
+func (n *BinaryNode) SumaNodosInternos() int {
+	if n.right == nil && n.left == nil {
+		return 0
+	}
+	suma := n.data
+	if n.right != nil {
+		suma += n.right.SumaNodosInternos()
+	}
+	if n.left != nil {
+		suma += n.left.SumaNodosInternos()
+	}
+	return suma
+
+}
+func (n *BinaryNode) SumaNodosPares() int {
+	suma := 0
+	if n != nil {
+		if n.data%2 == 0 {
+			suma += n.data
+		}
+		if n.left != nil {
+			suma += n.left.SumaNodosPares()
+		}
+		if n.right != nil {
+			suma += n.right.SumaNodosPares()
+		}
+	}
+	return suma
+}
+func (n *BinaryNode) SumaNodosMayorIgualQueSeis() int {
+	suma := 0
+	if n != nil {
+		if n.data >= 6 {
+			suma += n.data
+		}
+		if n.left != nil {
+			suma += n.left.SumaNodosMayorIgualQueSeis()
+		}
+		if n.right != nil {
+			suma += n.right.SumaNodosMayorIgualQueSeis()
+		}
+	}
+	return suma
+}
+func (n *BinaryNode) CalcularAlturaMaxima() int {
+	leftHeight := -1
+	rightHeight := -1
+	if n.left != nil {
+		leftHeight = n.left.CalcularAlturaMaxima()
+	}
+	if n.right != nil {
+		rightHeight = n.right.CalcularAlturaMaxima()
+	}
+	return int(1 + math.Max(float64(leftHeight), float64(rightHeight)))
+}
+
+func (n *BinaryNode) SumaHojasIzquierdas() int {
+	if n.left != nil && n.right == nil {
+		return n.left.data
+	}
+
+	suma := 0
+
+	if n.left != nil {
+		suma += n.left.SumaHojasIzquierdas()
+	}
+
+	if n.right != nil {
+		suma += n.right.SumaHojasIzquierdas()
+	}
+
+	return suma
+}
+
+func (n *BinaryNode) SumaDeNodosDerechosImpares() int {
+	suma := 0
+	if n != nil {
+		if n.right != nil && n.right.data%2 != 0 {
+			suma += n.right.data
+		}
+	}
+	if n.left != nil {
+		suma += n.left.SumaDeNodosDerechosImpares()
+	}
+	if n.right != nil {
+		suma += n.right.SumaDeNodosDerechosImpares()
+	}
+	return suma
+
+}
