@@ -150,21 +150,15 @@ func (n *BinaryNode) CalcularAlturaMaxima() int {
 }
 
 func (n *BinaryNode) SumaHojasIzquierdas() int {
-	if n.left != nil && n.right == nil {
-		return n.left.data
-	}
-
-	suma := 0
-
+	sum := 0
 	if n.left != nil {
-		suma += n.left.SumaHojasIzquierdas()
+		if n.left.left == nil && n.left.right == nil {
+			sum += n.left.data
+		}
+		sum += n.left.SumaHojasIzquierdas()
 	}
-
-	if n.right != nil {
-		suma += n.right.SumaHojasIzquierdas()
-	}
-
-	return suma
+	sum += n.right.SumaHojasIzquierdas()
+	return sum
 }
 
 func (n *BinaryNode) SumaDeNodosDerechosImpares() int {
